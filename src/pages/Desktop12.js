@@ -1,8 +1,17 @@
-import { useCallback } from "react";
-import { Button } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Button, useScrollTrigger } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
 const Desktop12 = () => {
+  let [userName, setUserName] = useState("");
+  useEffect(() => {
+    // Fetch user data from the mock API
+    fetch("http://localhost:3001/userInfo")
+      .then((response) => response.json())
+      .then((data) => setUserName(data.name))
+      .catch((error) => console.error("Error fetching user data:", error));
+  }, []);
+
   return (
     <div className="relative bg-white shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-[1024px] overflow-hidden text-center text-6xl text-white font-inter">
       <div className="absolute top-[246px] left-[calc(50%_-_594px)] rounded-xl bg-salmon-100 w-[1188px] h-[634px] overflow-hidden" />
@@ -136,7 +145,9 @@ const Desktop12 = () => {
         <div
           className="absolute top-[6px] left-[20px] bg-gainsboro-200 w-[378px] h-[84px]"
           id="customerNameDiv"
-        />
+        >
+          <p>User Name: {userName}</p>
+        </div>
         <div
           className="absolute top-[23px] left-[809px] bg-gainsboro-200 w-[274px] h-[29px]"
           id="customerEmail"

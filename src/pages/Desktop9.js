@@ -1,15 +1,34 @@
-import { useCallback } from "react";
+import { useState } from "react";
 import { TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useScroll } from "framer-motion";
 
 const Desktop9 = () => {
+  let [userName, setUserName] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:3001/userInfo", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userName }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("user info", data))
+      .catch((error) => console.error("Error fetching user data:", error));
+  };
   return (
     <div className="relative bg-white shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-[1024px] overflow-hidden text-left text-21xl text-black font-inter">
       <Link
         className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato absolute top-[914px] left-[550px] rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
         to="/license-type"
       >
-        <div className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step  ->`}</div>
+        <div
+          type="submit"
+          onClick={handleSubmit}
+          className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0"
+        >{`Next Step  ->`}</div>
       </Link>
       <div className="absolute top-[0px] left-[0px] w-[1440px] h-[207px] overflow-hidden" />
       <div className="absolute top-[254px] left-[343px] w-[724px] h-[607.73px] overflow-hidden" />
@@ -117,6 +136,10 @@ const Desktop9 = () => {
             size="medium"
             margin="none"
             required
+            value={userName}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
           />
           <p
             className="m-0 relative text-xl font-inter text-black text-left inline-block w-[91.08px] h-[35.74px] shrink-0"
