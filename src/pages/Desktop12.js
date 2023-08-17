@@ -5,11 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 const Desktop12 = () => {
   let [userName, setUserName] = useState("");
   useEffect(() => {
-    // Fetch user data from the mock API
-    fetch("http://localhost:3001/userInfo")
+    fetch("http://localhost:3000/posts")
       .then((response) => response.json())
-      .then((data) => setUserName(data.name))
-      .catch((error) => console.error("Error fetching user data:", error));
+      .then((data) => {
+        // Assuming "name" is a property in your data
+        setUserName(data.name);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
   return (

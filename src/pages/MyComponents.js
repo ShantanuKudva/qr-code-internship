@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import data from "../data.json"; // Adjust the path as needed
+
 import Desktop15 from "./Desktop15";
 
 function Pagination({ currentPage, itemsPerPage, totalItems, onPageChange }) {

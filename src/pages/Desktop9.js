@@ -7,8 +7,8 @@ const Desktop9 = () => {
   let [userName, setUserName] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3001/userInfo", {
-      method: "PUT",
+    fetch("http://localhost:3000/posts", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
