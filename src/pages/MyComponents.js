@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-
-import Desktop15 from "./Desktop15";
+import React, { useState } from 'react';
+import data from './data.json'; // Adjust the path as needed
 
 function Pagination({ currentPage, itemsPerPage, totalItems, onPageChange }) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -13,42 +12,43 @@ function Pagination({ currentPage, itemsPerPage, totalItems, onPageChange }) {
 
   return (
     <div className="pagination">
-      <button onClick={() => handlePageChange(currentPage - 1)}>
-        Previous
-      </button>
-      <span>
-        Page {currentPage} of {totalPages}
-      </span>
+      <button onClick={() => handlePageChange(currentPage - 1)}>Previous</button>
+      <span>Page {currentPage} of {totalPages}</span>
       <button onClick={() => handlePageChange(currentPage + 1)}>Next</button>
     </div>
   );
 }
 
-function MyComponent() {
-  const [values, setValues] = useState(() => {
-    const storedData = localStorage.getItem("values");
-    return storedData ? JSON.parse(storedData) : data;
-  });
-
-  const [searchTerm, setSearchTerm] = useState("");
+function MyComponent({ formData, setFormData }) {
+  const [values, setValues] = useState(data);
+  const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 30;
+  const itemsPerPage = 10; // Number of items to display per page
   const scrollRefs = {};
 
-  useEffect(() => {
-    localStorage.setItem("values", JSON.stringify(values));
-  }, [values]);
-
   const toggleValue = (key) => {
+    let temp = formData.moduleSelected;
+    if (!values[key]) {
+      temp.push(key);
+      setFormData({ ...formData, moduleSelected: temp })
+    }
+    else {
+      const index = temp.indexOf(key);
+      if (index > -1) { // only splice array when item is found
+        temp.splice(index, 1); // 2nd parameter means remove one item only
+      }
+      setFormData({ ...formData, moduleSelected: temp })
+    }
     setValues((prevValues) => ({
       ...prevValues,
-      [key]: !prevValues[key],
+      [key]: !prevValues[key]
     }));
   };
 
+  console.log(formData)
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset current page when search term changes
   };
 
   const filteredValues = Object.keys(values).filter((key) =>
@@ -81,9 +81,6 @@ function MyComponent() {
         totalItems={filteredValues.length}
         onPageChange={setCurrentPage}
       />
-      <div>
-        <Desktop15 values={values} />
-      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Desktop10 = () => {
+const Desktop10 = ({formData, setFormData}) => {
   return (
     <div className="relative bg-white shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-[1024px] overflow-hidden text-center text-21xl text-black font-hp-simplified-jpan">
       <div className="absolute top-[0px] left-[0px] w-[1440px] h-[207px] overflow-hidden">
@@ -86,8 +86,9 @@ const Desktop10 = () => {
         <Link
           className="cursor-pointer [border:none] p-0 bg-[transparent] absolute top-[146px] left-[0px] w-[382px] h-[143px] [&_.all-modules-enabled-container]:hover:text-white [&_.demo-license]:hover:text-white [&_.rectangle-div]:hover:bg-tomato"
           autoFocus
+          onClick={()=>{setFormData({...formData, licenseType:'Demo', noOfDays:7, endDate: formData.startDate.getDate + 7})}}
           id="demoLicenseButton"
-          to="/preview"
+          to="/license-details"
         >
           <div className="rectangle-div absolute top-[0px] left-[0px] rounded-31xl bg-whitesmoke-200 shadow-[5px_5px_7px_2px_rgba(0,_0,_0,_0.25)] w-[382px] h-[143px]" />
           <div className="demo-license absolute top-[25px] left-[56px] text-13xl font-hp-simplified-jpan text-black text-left flex items-center w-[300px] h-8">
@@ -103,6 +104,7 @@ const Desktop10 = () => {
         <Link
           className="cursor-pointer [border:none] p-0 bg-[transparent] absolute top-[146px] left-[577px] rounded-31xl w-[382px] h-[143px] [&_.production-license]:hover:text-white [&_.all-modules-enabled-container]:hover:text-white [&_.frame-child2]:hover:bg-tomato"
           autoFocus
+          onClick={()=>{setFormData({...formData, licenseType:'Production',noOfDays:1})}}
           id="productionLicenseButton"
           to="/license-details"
         >
@@ -120,6 +122,7 @@ const Desktop10 = () => {
         <Link
           className="cursor-pointer [border:none] p-0 bg-[transparent] absolute top-[366px] left-[577px] rounded-31xl w-[382px] h-[143px] [&_.production-license]:hover:text-white [&_.all-modules-enabled-container]:hover:text-white [&_.frame-child2]:hover:bg-tomato"
           autoFocus
+          onClick={()=>{setFormData({...formData, licenseType:'Perpetual', noOfDays:1})}}
           id="perpetualLicenseButton"
           to="/license-details"
         >
@@ -137,8 +140,9 @@ const Desktop10 = () => {
         <Link
           className="cursor-pointer [border:none] p-0 bg-[transparent] absolute top-[366px] left-[0px] rounded-31xl w-[382px] h-[143px] [&_.all-modules-enabled-container]:hover:text-white [&_.demo-license]:hover:text-white [&_.rectangle-div]:hover:bg-tomato"
           autoFocus
+          onClick={()=>{setFormData({...formData, licenseType:'Trial', noOfDays:30})}}
           id="trialLicenseButton"
-          to="/preview"
+          to="/license-details"
         >
           <div className="rectangle-div absolute top-[0px] left-[0px] rounded-31xl bg-whitesmoke-200 shadow-[5px_5px_7px_2px_rgba(0,_0,_0,_0.25)] w-[382px] h-[143px]" />
           <div className="demo-license absolute top-[25px] left-[56px] text-13xl font-hp-simplified-jpan text-black text-left flex items-center w-[300px] h-8">

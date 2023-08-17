@@ -8,9 +8,11 @@
 @tailwind utilities;
 body {
   @apply leading-[normal] m-0;
+  font-size: 0.5rem !important;
 }
 *,
 ::before,
 ::after {
   border-width: 0;
 }
+

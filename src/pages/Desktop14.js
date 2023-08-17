@@ -3,7 +3,7 @@ import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MyComponent from "./MyComponents";
 
-const Desktop14 = () => {
+const Desktop14 = ({formData, setFormData}) => {
   const navigate = useNavigate();
 
   const onGroupButtonClick = useCallback(() => {
@@ -12,11 +12,11 @@ const Desktop14 = () => {
 
   return (
     <div className="relative bg-white shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-[1024px] overflow-hidden">
-      <div className="absolute top-[0px] left-[0px] bg-tomato w-[1440px] h-[207px]" />
+      <div style={{position:"relative"}} className="absolute top-[0px] left-[0px] bg-tomato w-[1440px] h-[207px]" />
       <TextField
-        className="[border:none] bg-[transparent] absolute top-[75px] left-[967px]"
+        className="[border:none] absolute top-[75px] left-[967px]"
         sx={{ width: 431 }}
-        color="primary"
+        color="error"
         variant="filled"
         type="text"
         id="search"
@@ -34,10 +34,8 @@ const Desktop14 = () => {
         onClick={onGroupButtonClick}
       >{`<- Go Back`}</Button>
       <div
-        className="absolute top-[calc(50%_-_258px)] left-[calc(50%_-_674px)] bg-gainsboro-200 w-[1347px] h-[727px]"
-        id="moduleContainer"
       >
-        <MyComponent />
+        <MyComponent formData={formData} setFormData={setFormData}/>
       </div>
     </div>
   );
