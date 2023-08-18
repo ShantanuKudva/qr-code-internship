@@ -99,16 +99,15 @@ const Desktop12 = ({formData}) => {
         <div className="absolute top-[129px] left-[9px] flex items-center w-[466px] h-[38px]">License Duration: {tempData.noOfDays}</div>
         <div className="absolute top-[186px] left-[9px] flex items-center w-[466px] h-[38px]">Valid Upto: {tempData.endDate}</div>
         <div className="absolute top-[72px] left-[9px] flex items-center w-[466px] h-[38px]">License Type: {tempData.licenseType}</div>
-        <Button
-          className="absolute top-[243px] left-[9px]"
-          sx={{ width: 306 }}
-          variant="contained"
-          id="modulebutton"
-          color="primary"
-          href="/selected-modules"
-        >
-          Modules Selected
-        </Button>
+        <Link
+            className="cursor-pointer [text-decoration:none] absolute top-[125px] left-[0px] w-[341px] h-[62px] text-center text-white"
+            to="/selected-modules"
+          >
+            <div className="absolute top-[0px] left-[0px] rounded-xl bg-dimgray-200 w-[341px] h-[62px]" />
+            <div className="absolute top-[5.89px] left-[31.56px] flex items-center justify-center w-[278.35px] h-[50.47px]">
+              View Selected Modules
+            </div>
+          </Link>
         <div
           className="absolute top-[20px] left-[192px] bg-salmon-200 w-56 h-[29px]"
           id="organizationName"

@@ -11,7 +11,7 @@ const Desktop14 = ({formData, setFormData}) => {
   return (
     <div className="relative bg-white shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-[1024px] overflow-hidden">
       <div style={{position:"relative"}} className="absolute top-[0px] left-[0px] bg-tomato w-[1440px] h-[207px]" />
-      <TextField
+      {/* <TextField
         className="[border:none] absolute top-[75px] left-[967px]"
         sx={{ width: 431 }}
         color="error"
@@ -21,7 +21,7 @@ const Desktop14 = ({formData, setFormData}) => {
         placeholder="Search"
         size="medium"
         margin="none"
-      />
+      /> */}
       <Link
         className="absolute top-[62px] left-[36px] cursor-pointer"
         sx={{ width: 330 }}

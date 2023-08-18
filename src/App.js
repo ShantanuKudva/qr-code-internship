@@ -89,8 +89,8 @@ function App() {
       <Route path="/" element={<Desktop9 formData={formData} setFormData={setFormData} />} />
       <Route path="/license-type" element={<Desktop10 formData={formData} setFormData={setFormData} />} />
       <Route path="/license-details" element={<Desktop11 formData={formData} setFormData={setFormData} />} />
-      <Route path="/preview" element={<Desktop12 />} />
-      <Route path="/selected-modules" element={<Desktop15 />} />
+      <Route path="/preview" element={<Desktop12 formData={formData} setFormData={setFormData}/>} />
+      <Route path="/selected-modules" element={<Desktop15 formData={formData} setFormData={setFormData}/>} />
       <Route path="/module-selector" element={<Desktop14 formData={formData} setFormData={setFormData} />} />
 
     </Routes>
