@@ -1,0 +1,75 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "name": "dsf",
+      "email": "sdfsf",
+      "phone": "sdfs",
+      "organization": "sdfs",
+      "licenseType": "Demo",
+      "startDate": "2023-08-17",
+      "endDate": "2023-08-24",
+      "noOfDays": 7,
+      "moduleSelected": [],
+      "licenseRestrictions": "",
+      "comments": "",
+      "id": 2
+    },
+    {
+      "name": "dsf",
+      "email": "sdfsf",
+      "phone": "sdfs",
+      "organization": "sdfs",
+      "licenseType": "Demo",
+      "startDate": "2023-08-17",
+      "endDate": "2023-08-24",
+      "noOfDays": 7,
+      "moduleSelected": [],
+      "licenseRestrictions": "",
+      "comments": "",
+      "id": 3
+    },
+    {
+      "name": "lalit",
+      "email": "vns@mail",
+      "phone": "108",
+      "organization": "vns",
+      "licenseType": "Trial",
+      "startDate": "2023-08-17",
+      "endDate": "2023-09-16",
+      "noOfDays": 30,
+      "moduleSelected": [],
+      "licenseRestrictions": "ily",
+      "comments": "ihy",
+      "id": 4
+    },
+    {
+      "name": "a",
+      "email": "b",
+      "phone": "c",
+      "organization": "d",
+      "licenseType": "Demo",
+      "startDate": "2023-08-17",
+      "endDate": "2023-08-24",
+      "noOfDays": 7,
+      "moduleSelected": [],
+      "licenseRestrictions": "f",
+      "comments": "g",
+      "id": 5
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

@@ -2,14 +2,21 @@ import { useEffect, useState } from "react";
 import { Button, useScrollTrigger } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
-const Desktop12 = () => {
+
+
+const Desktop12 = ({formData}) => {
   let [userName, setUserName] = useState("");
+  let [tempData, setTempData] = useState({});
   useEffect(() => {
-    fetch("http://localhost:3000/posts")
+    fetch("http://localhost:3001/posts")
       .then((response) => response.json())
       .then((data) => {
-        // Assuming "name" is a property in your data
-        setUserName(data.name);
+        console.log(data)
+        setTempData(data[data.length-1]);
+       
+          
+        
+
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
@@ -88,10 +95,10 @@ const Desktop12 = () => {
         </div>
       </div>
       <div className="absolute top-[381px] left-[calc(50%_-_569px)] w-[1102px] h-[453px] overflow-y-auto text-left text-9xl text-whitesmoke-100">
-        <div className="absolute top-[15px] left-[9px] flex items-center w-[466px] h-[38px]">{`Organization: `}</div>
-        <div className="absolute top-[129px] left-[9px] flex items-center w-[466px] h-[38px]">{`License Duration: `}</div>
-        <div className="absolute top-[186px] left-[9px] flex items-center w-[466px] h-[38px]">{`Valid Upto: `}</div>
-        <div className="absolute top-[72px] left-[9px] flex items-center w-[466px] h-[38px]">{`License Type: `}</div>
+        <div className="absolute top-[15px] left-[9px] flex items-center w-[466px] h-[38px]">Organization: {tempData.organization}</div>
+        <div className="absolute top-[129px] left-[9px] flex items-center w-[466px] h-[38px]">License Duration: {tempData.noOfDays}</div>
+        <div className="absolute top-[186px] left-[9px] flex items-center w-[466px] h-[38px]">Valid Upto: {tempData.endDate}</div>
+        <div className="absolute top-[72px] left-[9px] flex items-center w-[466px] h-[38px]">License Type: {tempData.licenseType}</div>
         <Button
           className="absolute top-[243px] left-[9px]"
           sx={{ width: 306 }}
@@ -122,6 +129,7 @@ const Desktop12 = () => {
           <div className="absolute top-[0px] left-[0px] inline-block w-[1023px] h-12">
             <p className="m-0">
               <b>License Restrictions</b>
+              {tempData.licenseRestrictions}
             </p>
             <p className="m-0 text-6xl">&nbsp;</p>
           </div>
@@ -134,6 +142,7 @@ const Desktop12 = () => {
           <div className="absolute top-[0px] left-[0px] inline-block w-[1023px] h-12">
             <p className="m-0">
               <b>Additional Comments</b>
+              {tempData.comments}
             </p>
             <p className="m-0 text-6xl">&nbsp;</p>
           </div>
@@ -148,7 +157,7 @@ const Desktop12 = () => {
           className="absolute top-[6px] left-[20px] bg-gainsboro-200 w-[378px] h-[84px]"
           id="customerNameDiv"
         >
-          <p>User Name: {userName}</p>
+          <p>User Name: {tempData.name}</p>
         </div>
         <div
           className="absolute top-[23px] left-[809px] bg-gainsboro-200 w-[274px] h-[29px]"

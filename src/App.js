@@ -10,8 +10,9 @@ import Desktop12 from "./pages/Desktop12";
 import Desktop15 from "./pages/Desktop15";
 import Desktop14 from "./pages/Desktop14";
 import Desktop11 from "./pages/Desktop11";
-
-import { useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
+import { useEffect, useState } from "react";
+import "./"
 
 function App() {
   const action = useNavigationType();
@@ -23,6 +24,20 @@ function App() {
       window.scrollTo(0, 0);
     }
   }, [action, pathname]);
+  const [formData, setFormData] = useState({
+    id:uuidv4(),
+    name: '',
+    email: '',
+    phone: '',
+    organization: '',
+    licenseType: '',
+    startDate: new Date().toISOString().substr(0, 10),
+    endDate: '',
+    noOfDays: 1,
+    moduleSelected: [],
+    licenseRestrictions: '',
+    comments: ''
+  })
 
   useEffect(() => {
     let title = "";
@@ -53,10 +68,6 @@ function App() {
         title = "";
         metaDescription = "";
         break;
-      case "/desktop-151":
-        title = "";
-        metaDescription = "";
-        break;
     }
 
     if (title) {
@@ -75,12 +86,13 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Desktop9 />} />
-      <Route path="/license-type" element={<Desktop10 />} />
+      <Route path="/" element={<Desktop9 formData={formData} setFormData={setFormData} />} />
+      <Route path="/license-type" element={<Desktop10 formData={formData} setFormData={setFormData} />} />
+      <Route path="/license-details" element={<Desktop11 formData={formData} setFormData={setFormData} />} />
       <Route path="/preview" element={<Desktop12 />} />
       <Route path="/selected-modules" element={<Desktop15 />} />
-      <Route path="/module-selector" element={<Desktop14 />} />
-      <Route path="/license-details" element={<Desktop11 />} />
+      <Route path="/module-selector" element={<Desktop14 formData={formData} setFormData={setFormData} />} />
+
     </Routes>
   );
 }

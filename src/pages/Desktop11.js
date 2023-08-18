@@ -2,13 +2,9 @@ import { useState, useEffect } from "react";
 import { TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
-const Desktop11 = () => {
-  // useEffect(() => {
-  //   const newDate = new Date(startDate);
-  //   newDate.setDate(startDate.getDate + 1);
-  //   setEndDate(newDate);
-  // }, []);
-  const [numberOfDays, setNumberOfDays] = useState("");
+const Desktop11 = ({ formData, setFormData }) => {
+
+  const [numberOfDays, setNumberOfDays] = useState(1);
   const [startDate, setStartDate] = useState(
     new Date().toISOString().substr(0, 10)
   );
@@ -17,21 +13,36 @@ const Desktop11 = () => {
   const handleNumberOfDaysChange = (event) => {
     setNumberOfDays(event.target.value);
   };
+  console.log(formData)
 
-  const handleStartDateChange = (event) => {
-    calculateEndDate(numberOfDays, event.target.value);
-    setStartDate(event.target.value);
-  };
 
-  const calculateEndDate = (days, startDate) => {
+
+  const calculateEndDate = (numberOfDays, startDate) => {
     if (!numberOfDays || !startDate) {
       setEndDate(startDate.getDate + 1);
+      return;
     }
     const startDateObject = new Date(startDate);
     const endDateObject = new Date(startDateObject);
-    endDateObject.setDate(startDateObject.getDate() + parseInt(days, 10));
-    setEndDate(endDateObject.toISOString().substring(0, 10));
+    endDateObject.setDate(startDateObject.getDate() + parseInt(numberOfDays, 10));
+    setFormData({ ...formData, endDate: endDateObject.toISOString().substring(0, 10) });
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:3001/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("user info", data))
+      .catch((error) => console.error("Error fetching user data:", error));
+  };
+  useEffect(() => {
+    calculateEndDate(formData.noOfDays, formData.startDate)
+  }, [formData.noOfDays, formData.startDate]);
 
   return (
     <div className="relative bg-white shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-[1024px] overflow-hidden text-center text-21xl text-black font-hp-simplified-jpan">
@@ -105,6 +116,7 @@ const Desktop11 = () => {
         <div className="absolute top-[0px] left-[0px] rounded-mini bg-whitesmoke-100 box-border w-[434px] h-[73px] border-[3px] border-solid border-gainsboro-100" />
       </div>
       <Link
+      onClick={handleSubmit}
         className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato absolute top-[914px] left-[550px] rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
         to="/preview"
       >
@@ -124,6 +136,8 @@ const Desktop11 = () => {
             color="secondary"
             variant="outlined"
             multiline
+            value={formData.licenseRestrictions}
+            onChange={(e) => { setFormData({ ...formData, licenseRestrictions: e.target.value }) }}
             id="licenserestrictioninput"
             placeholder="Add in some comments here (IF APPLICABLE)"
             margin="none"
@@ -140,6 +154,8 @@ const Desktop11 = () => {
             className="absolute top-[71px] left-[0px]"
             sx={{ width: 913 }}
             color="secondary"
+            value={formData.comments}
+            onChange={(e) => { setFormData({ ...formData, comments: e.target.value }) }}
             variant="outlined"
             multiline
             id="additionalCommentsInput"
@@ -201,28 +217,55 @@ const Desktop11 = () => {
           </p>
           <TextField
             className="[border:none] bg-[transparent] absolute top-[210px] left-[0px]"
-            sx={{ width: 274 }}
+            sx={{
+              width: 274, color: 'black', "& .MuiInputBase-input.Mui-disabled": {
+                WebkitTextFillColor: "#000000",
+              }
+            }}
             color="secondary"
             variant="outlined"
             type="number"
             id="dayinput"
+            disabled={formData.licenseType === 'Demo' || formData.licenseType === 'Trial'}
             placeholder="Enter no of days"
             size="medium"
             margin="none"
-            defaultValue={1}
             required
-            value={numberOfDays}
-            onChange={handleNumberOfDaysChange}
+            onBlur={(e) => {
+              if (!formData.noOfDays) {
+                setFormData({ ...formData, noOfDays: 1 });
+              }
+            }}
+            value={formData.noOfDays}
+            onChange={(e) => { setFormData({ ...formData, noOfDays: e.target.value }) }}
           />
-          <div
+          {/* <div
             className="absolute top-[459px] left-[511px] rounded-mini bg-whitesmoke-100 box-border w-[274px] h-[63px] border-[3px] border-solid border-gainsboro-100"
             id="calculatedEndDate"
           >
-            {endDate && <div>{endDate}</div>}
-          </div>
+          </div> */}
+            <TextField
+              className="[border:none] bg-[transparent] absolute top-[459px] left-[511px]"
+              sx={{
+                width: 300, "& .MuiInputBase-input.Mui-disabled": {
+                  WebkitTextFillColor: "#000000",
+                }
+              }}
+              color="secondary"
+              variant="outlined"
+              id="dateInput"
+              disabled
+              size="medium"
+              margin="none"
+              value={formData.endDate}
+            />
           <TextField
             className="[border:none] bg-[transparent] absolute top-[459px] left-[0px]"
-            sx={{ width: 434 }}
+            sx={{
+              width: 434, "& .MuiInputBase-input.Mui-disabled": {
+                WebkitTextFillColor: "#000000",
+              }
+            }}
             color="secondary"
             variant="outlined"
             type="date"
@@ -230,9 +273,9 @@ const Desktop11 = () => {
             placeholder="Default - Day of Application"
             size="medium"
             margin="none"
-            defaultValue={new Date().toISOString().substring(0, 10)}
-            onChange={handleStartDateChange}
-            value={startDate}
+            disabled={formData.licenseType === 'Demo' || formData.licenseType === 'Trial'}
+            onChange={(e) => { setFormData({ ...formData, startDate: e.target.value }) }}
+            value={formData.startDate}
           />
         </div>
       </div>

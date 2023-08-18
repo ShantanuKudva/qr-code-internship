@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { TextField } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useScroll } from "framer-motion";
+//import { useScroll } from "framer-motion";
 
-const Desktop9 = () => {
+const Desktop9 = ({ formData, setFormData }) => {
   let [userName, setUserName] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,16 +20,7 @@ const Desktop9 = () => {
   };
   return (
     <div className="relative bg-white shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-[1024px] overflow-hidden text-left text-21xl text-black font-inter">
-      <Link
-        className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato absolute top-[914px] left-[550px] rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
-        to="/license-type"
-      >
-        <div
-          type="submit"
-          onClick={handleSubmit}
-          className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0"
-        >{`Next Step  ->`}</div>
-      </Link>
+
       <div className="absolute top-[0px] left-[0px] w-[1440px] h-[207px] overflow-hidden" />
       <div className="absolute top-[254px] left-[343px] w-[724px] h-[607.73px] overflow-hidden" />
       <div className="absolute top-[0px] left-[0px] w-[1440px] h-[207px] overflow-hidden" />
@@ -101,7 +92,7 @@ const Desktop9 = () => {
           </div>
         </div>
       </nav>
-      <div className="absolute top-[241px] left-[343px] w-[915px] h-[634px] overflow-hidden flex flex-col pt-1.5 pb-0 pr-0 pl-0.5 box-border items-start justify-start gap-[35px]">
+      <div className="absolute top-[241px] left-[343px] w-[915px] h-[634px] overflow-y-scroll flex flex-col pt-1.5 pb-0 pr-0 pl-0.5 box-border items-start justify-start gap-[35px]">
         <p
           className="m-0 relative font-bold inline-block w-[685px] h-10 shrink-0"
           id="pageOneHeading"
@@ -114,89 +105,98 @@ const Desktop9 = () => {
         >
           Let us get to know you!
         </p>
-        <form
-          className="w-[724px] h-[465.73px] flex flex-col items-start justify-start gap-[10px]"
-          method="post"
-          id="customerInput"
+        <p
+          className="m-0 relative text-xl font-inter text-black text-left inline-block w-[91.08px] h-[35.74px] shrink-0"
+          id="nameLabel"
         >
-          <p
-            className="m-0 relative text-xl font-inter text-black text-left inline-block w-[91.08px] h-[35.74px] shrink-0"
-            id="nameLabel"
-          >
-            Name
-          </p>
-          <TextField
-            className="[border:none] bg-[transparent] relative"
-            sx={{ width: 724 }}
-            color="secondary"
-            variant="outlined"
-            type="text"
-            id="nameInput"
-            placeholder="Enter your Name"
-            size="medium"
-            margin="none"
-            required
-            value={userName}
-            onChange={(e) => {
-              setUserName(e.target.value);
-            }}
-          />
-          <p
-            className="m-0 relative text-xl font-inter text-black text-left inline-block w-[91.08px] h-[35.74px] shrink-0"
-            id="emailLabel"
-          >
-            Email
-          </p>
-          <TextField
-            className="[border:none] bg-[transparent] relative"
-            sx={{ width: 724 }}
-            color="secondary"
-            variant="outlined"
-            type="email"
-            id="emailInput"
-            placeholder="Enter your Email"
-            size="medium"
-            margin="none"
-            required
-          />
-          <p
-            className="m-0 relative text-xl font-inter text-black text-left inline-block w-[250.08px] h-[35.74px] shrink-0"
-            id="contactLabel"
-          >
-            Contact Number
-          </p>
-          <TextField
-            className="[border:none] bg-[transparent] relative"
-            sx={{ width: 724 }}
-            color="secondary"
-            variant="outlined"
-            type="tel"
-            id="phoneInput"
-            placeholder="Enter your Phone Number"
-            size="medium"
-            margin="none"
-            required
-          />
-          <p
-            className="m-0 relative text-xl font-inter text-black text-left inline-block w-[250.08px] h-[35.74px] shrink-0"
-            id="orgsLabel"
-          >
-            Organization
-          </p>
-          <TextField
-            className="[border:none] bg-[transparent] relative"
-            sx={{ width: 724 }}
-            color="secondary"
-            variant="outlined"
-            type="text"
-            id="orgsInput"
-            placeholder="Enter Organization Name"
-            size="medium"
-            margin="none"
-            required
-          />
-        </form>
+          Name
+        </p>
+        <TextField
+          className="[border:none] bg-[transparent] relative"
+          sx={{ width: 724 }}
+          color="secondary"
+          variant="outlined"
+          type="text"
+          id="nameInput"
+          placeholder="Enter your Name"
+          size="medium"
+          margin="none"
+          required
+          value={formData.name}
+          onChange={(e) => {
+            setFormData({ ...formData, name: e.target.value })
+          }}
+        />
+        <p
+          className="m-0 relative text-xl font-inter text-black text-left inline-block w-[91.08px] h-[35.74px] shrink-0"
+          id="emailLabel"
+        >
+          Email
+        </p>
+        <TextField
+          className="[border:none] bg-[transparent] relative"
+          sx={{ width: 724 }}
+          color="secondary"
+          variant="outlined"
+          type="email"
+          id="emailInput"
+          value={formData.email}
+          onChange={(e) => { setFormData({ ...formData, email: e.target.value }) }}
+          placeholder="Enter your Email"
+          size="medium"
+          margin="none"
+          required
+        />
+        
+        <p
+          className="m-0 relative text-xl font-inter text-black text-left inline-block w-[250.08px] h-[35.74px] shrink-0"
+          id="contactLabel"
+        >
+          Contact Number
+        </p>
+        <TextField
+          className="[border:none] bg-[transparent] relative"
+          sx={{ width: 724 }}
+          color="secondary"
+          variant="outlined"
+          type="tel"
+          value={formData.phone}
+          onChange={(e) => { setFormData({ ...formData, phone: e.target.value }) }}
+          id="phoneInput"
+          placeholder="Enter your Phone Number"
+          size="medium"
+          margin="none"
+          required
+        />
+        <p
+          className="m-0 relative text-xl font-inter text-black text-left inline-block w-[250.08px] h-[35.74px] shrink-0"
+          id="orgsLabel"
+        >
+          Organization
+        </p>
+        <TextField
+          className="[border:none] bg-[transparent] relative"
+          sx={{ width: 724 }}
+          color="secondary"
+          variant="outlined"
+          type="text"
+          id="orgsInput"
+          placeholder="Enter Organization Name"
+          size="medium"
+          value={formData.organization}
+          onChange={(e) => { setFormData({ ...formData, organization: e.target.value }) }}
+          margin="none"
+          required
+        />
       </div>
+        <Link
+          className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato absolute top-[914px] left-[550px] rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
+          to="/license-type"
+        >
+          <div
+            className="[text-decoration:none] relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0"
+          >{`Next Step  ->`}</div>
+        </Link>
     </div>
   );
 };
