@@ -61,7 +61,7 @@ function MyComponent({ formData, setFormData }) {
 
   const renderedValues = paginatedValues.map((key) => (
     <div key={key} ref={(ref) => (scrollRefs[key] = ref)}>
-      {key}: {values[key] ? "True" : "False"}
+      {key}: {formData.moduleSelected.includes(key) ? "True" : "False"}
       <button onClick={() => toggleValue(key)}>Toggle</button>
     </div>
   ));

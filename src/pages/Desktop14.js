@@ -2,13 +2,11 @@ import { useCallback } from "react";
 import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MyComponent from "./MyComponents";
-
+import { Link } from "react-router-dom";
 const Desktop14 = ({formData, setFormData}) => {
   const navigate = useNavigate();
 
-  const onGroupButtonClick = useCallback(() => {
-    navigate("/license-details");
-  }, [navigate]);
+
 
   return (
     <div className="relative bg-white shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-full h-[1024px] overflow-hidden">
@@ -24,15 +22,15 @@ const Desktop14 = ({formData, setFormData}) => {
         size="medium"
         margin="none"
       />
-      <Button
+      <Link
         className="absolute top-[62px] left-[36px] cursor-pointer"
         sx={{ width: 330 }}
         variant="contained"
         id="gobackbutton"
         color="primary"
-        href="/license-details"
-        onClick={onGroupButtonClick}
-      >{`<- Go Back`}</Button>
+        to="/license-details"
+       
+      >{`<- Go Back`}</Link>
       <div
       >
         <MyComponent formData={formData} setFormData={setFormData}/>
