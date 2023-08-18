@@ -28,7 +28,7 @@ const Desktop11 = ({ formData, setFormData }) => {
     setFormData({ ...formData, endDate: endDateObject.toISOString().substring(0, 10) });
   };
   const handleSubmit = (e) => {
-    e.preventDefault();
+   
     fetch("http://localhost:3001/posts", {
       method: "POST",
       headers: {
@@ -39,6 +39,7 @@ const Desktop11 = ({ formData, setFormData }) => {
       .then((response) => response.json())
       .then((data) => console.log("user info", data))
       .catch((error) => console.error("Error fetching user data:", error));
+
   };
   useEffect(() => {
     calculateEndDate(formData.noOfDays, formData.startDate)
@@ -116,9 +117,10 @@ const Desktop11 = ({ formData, setFormData }) => {
         <div className="absolute top-[0px] left-[0px] rounded-mini bg-whitesmoke-100 box-border w-[434px] h-[73px] border-[3px] border-solid border-gainsboro-100" />
       </div>
       <Link
+      to="/preview"
       onClick={handleSubmit}
         className="[text-decoration:none] cursor-pointer [border:none] p-0 bg-tomato absolute top-[914px] left-[550px] rounded-sm w-[341px] h-[62px] flex flex-col items-center justify-center"
-        to="/preview"
+        
       >
         <div className="relative text-6xl font-inter text-white text-center flex items-center justify-center w-[278.35px] h-[50.47px] shrink-0">{`Next Step  ->`}</div>
       </Link>
